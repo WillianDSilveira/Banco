@@ -11,43 +11,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp"
-        tools:layout_editor_absoluteX="-35dp"
-        tools:layout_editor_absoluteY="-182dp">
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/textView"
-            android:layout_width="102dp"
+            android:id="@+id/txtNomeTitular"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="300dp"
-            android:text="Saldo"
-            android:textSize="34sp" />
+            android:layout_marginTop="200dp"
+            android:text="Titular: "
+            android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView2"
-            android:layout_width="102dp"
+            android:id="@+id/txtNumeroConta"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="0"
-            android:textSize="34sp" />
+            android:text="Conta: "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtSaldo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Saldo: R$ 0,00"
+            android:textSize="18sp" />
 
         <Button
-            android:id="@+id/deposito"
+            android:id="@+id/btnDeposito"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="depositar"
-            android:text="Depósito" />
-
-        <Button
-            android:id="@+id/saque"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Saque" />
-
-        <Button
-            android:id="@+id/extrato"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Extrato" />
+            android:text="Depositar" />
 
     </LinearLayout>
 

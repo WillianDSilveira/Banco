@@ -5,6 +5,30 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:onClick="confirmarDeposito"
     tools:context=".DepositoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/edtValorDeposito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:hint="Digite o valor do depósito"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/btnConfirmarDeposito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="confirmarDeposito"
+            android:text="Confirmar Depósito" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
