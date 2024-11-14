@@ -31,11 +31,6 @@ public class PrincipalActivity extends AppCompatActivity {
 
     }
 
-    public void depositar(View view) {
-        Intent intent = new Intent(this, DepositoActivity.class);
-        startActivity(intent);
-    }
-
     // Método para carregar as informações da conta na interface
     private void carregarInformacoesDaConta() {
         Conta conta = DadosCompartilhados.conta;
@@ -44,5 +39,17 @@ public class PrincipalActivity extends AppCompatActivity {
         txtSaldo.setText(String.format("Saldo: R$ %.2f", conta.saldo));
     }
 
+    public void depositar(View view) {
+        Intent intent = new Intent(this, DepositoActivity.class);
+        startActivity(intent);
+    }
 
+    public void sacar(View view) {
+        Intent intent = new Intent(this, SaqueActivity.class);
+        startActivity(intent);
+    }
 }
+
+
+
+
