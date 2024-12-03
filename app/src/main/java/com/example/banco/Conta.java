@@ -1,13 +1,15 @@
 package com.example.banco;
 
 public class Conta {
-    public String nomeTitular;
-    public String numeroDaConta;
+    public int id;
+    public double numeroConta;
     public double saldo;
 
-    public Conta(String nomeTitular, String numeroDaConta, double saldo) {
-        this.nomeTitular = nomeTitular;
-        this.numeroDaConta = numeroDaConta;
+    public Conta() {
+    }
+    public Conta(int id, double numeroConta, double saldo) {
+        this.id = id;
+        this.numeroConta = numeroConta;
         this.saldo = saldo;
     }
 }

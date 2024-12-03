@@ -5,35 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="confirmarDeposito"
-    tools:context=".DepositoActivity">
+    tools:context=".ExtratoActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Tipo de Transação"
+            android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/edtValorDeposito"
+            android:id="@+id/editTextText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:hint="Digite o valor do depósito"
-            android:inputType="numberDecimal" />
+            android:ems="10"
+            android:hint="Deposito"
+            android:inputType="text" />
 
         <Button
-            android:id="@+id/btnConfirmarDeposito"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="confirmarDeposito"
-            android:text="Confirmar Depósito" />
+            android:text="Buscar" />
 
         <ListView
-            android:id="@+id/listaExtrato"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

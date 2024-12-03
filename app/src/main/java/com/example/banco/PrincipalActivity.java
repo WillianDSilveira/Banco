@@ -15,6 +15,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
 
     private TextView txtNomeTitular, txtNumeroConta, txtSaldo;
+    RepositorioBanco repositorioBanco;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,12 @@ public class PrincipalActivity extends AppCompatActivity {
 
     // Método para carregar as informações da conta na interface
     private void carregarInformacoesDaConta() {
-        Conta conta = DadosCompartilhados.conta;
-        txtNomeTitular.setText("Titular: " + conta.nomeTitular);
-        txtNumeroConta.setText("Conta: " + conta.numeroDaConta);
-        txtSaldo.setText(String.format("Saldo: R$ %.2f", conta.saldo));
+        repositorioBanco = new RepositorioBanco(this);
+
+
+       /* Conta conta =  repositorioBanco.listarExtrato();
+        txtNumeroConta.setText("Conta: " + conta.numeroConta);
+        txtSaldo.setText(String.format("Saldo: R$ %.2f", conta.saldo));*/
     }
 
     public void depositar(View view) {
