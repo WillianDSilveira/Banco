@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class PrincipalActivity extends AppCompatActivity {
 
 
-    private TextView txtNomeTitular, txtNumeroConta, txtSaldo;
+    private TextView  txtSaldo;
     RepositorioBanco repositorioBanco;
 
     @Override
@@ -24,8 +24,7 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         // Inicializa os componentes da interface de usuário
-        txtNomeTitular = findViewById(R.id.txtNomeTitular);
-        txtNumeroConta = findViewById(R.id.txtNumeroConta);
+
         txtSaldo = findViewById(R.id.txtSaldo);
 
         carregarInformacoesDaConta();
@@ -35,11 +34,8 @@ public class PrincipalActivity extends AppCompatActivity {
     // Método para carregar as informações da conta na interface
     private void carregarInformacoesDaConta() {
         repositorioBanco = new RepositorioBanco(this);
-
-
-       /* Conta conta =  repositorioBanco.listarExtrato();
-        txtNumeroConta.setText("Conta: " + conta.numeroConta);
-        txtSaldo.setText(String.format("Saldo: R$ %.2f", conta.saldo));*/
+        Conta conta =  repositorioBanco.buscarConta();
+        txtSaldo.setText(String.format("Saldo: R$ %.2f", conta.saldo));
     }
 
     public void depositar(View view) {

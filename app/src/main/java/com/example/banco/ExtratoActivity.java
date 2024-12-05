@@ -22,29 +22,18 @@ public class ExtratoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_extrato);
         setTitle("EXTRATO");
 
-
         repositorioBanco = new RepositorioBanco(this);
+        ListView listView = findViewById(R.id.ListaExtrato);
 
-        ListView listView = findViewById(R.id.listaExtrato);
+        // Pegando a lista de transações do banco
+        List<String> transacoes = repositorioBanco.listarTransacoes();
 
-        // pegando a lista do banco
-        List<Conta> listaDB = repositorioBanco.listarExtrato();
-        String[] dados = new String[listaDB.size()];
-
-        for (int i = 0; i < listaDB.size(); i++) {
-            Conta conta = listaDB.get(i);
-            dados[i] = conta.conta + " - " + conta.saldo;
-            // dados[i] = DadosCompartilhados.lista.get(i).nome;
-        }
-
-        ArrayAdapter<String> adapter =
-                new ArrayAdapter<>(this,
-                        android.R.layout.simple_list_item_1,
-                        dados);
+        // Adaptador para o ListView
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, transacoes);
 
         listView.setAdapter(adapter);
 

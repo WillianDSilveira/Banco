@@ -13,6 +13,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class SaqueActivity extends AppCompatActivity {
+    RepositorioBanco repositorioBanco = new RepositorioBanco(this);
+    Conta conta = repositorioBanco.getConta();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,6 @@ public class SaqueActivity extends AppCompatActivity {
     public void confirmarSaque(View view) {
 
         EditText edtValorSaque = findViewById(R.id.edtValorSaque);
-
         String valorTexto = edtValorSaque.getText().toString();
 
         // Verifica se campo esta vazio
@@ -40,13 +42,18 @@ public class SaqueActivity extends AppCompatActivity {
             return;
         }
         // Verifica se o valorSaque não é menor qua o saldo em conta
-        if (DadosCompartilhados.conta.saldo < valorSaque ) {
+        if (conta.saldo < valorSaque ) {
             Toast.makeText(this, "O Valor não disponivel em conta", Toast.LENGTH_SHORT).show();
             return;
         }
 
+
+
         // Atualiza o saldo diretamente na conta
-        DadosCompartilhados.conta.saldo -= valorSaque;
+        double novoSaldo = conta.saldo - valorSaque;
+        repositorioBanco.atualizarSaldo(novoSaldo);
+        repositorioBanco.registrarTransacao("Saque", valorSaque, novoSaldo);
+
         Toast.makeText(this, "Depósito realizado com sucesso", Toast.LENGTH_SHORT).show();
 
 
