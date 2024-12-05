@@ -15,6 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class DepositoActivity extends AppCompatActivity {
     RepositorioBanco repositorioBanco;
     Conta conta;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,9 @@ public class DepositoActivity extends AppCompatActivity {
     }
 
     public void confirmarDeposito(View view) {
+        repositorioBanco = new RepositorioBanco(this);
+        conta = repositorioBanco.getConta();
+
         EditText edtValorDeposito = findViewById(R.id.edtValorDeposito);
         String valorTexto = edtValorDeposito.getText().toString();
 
@@ -41,14 +45,16 @@ public class DepositoActivity extends AppCompatActivity {
         // Atualiza o saldo diretamente na conta
         double novoSaldo = conta.saldo + valorDeposito;
         repositorioBanco.atualizarSaldo(valorDeposito);
-        repositorioBanco.registrarTransacao("Deposito", valorDeposito, novoSaldo);
+        repositorioBanco.registrarTransacao("deposito", valorDeposito, novoSaldo);
+
         Toast.makeText(this, "Depósito realizado com sucesso", Toast.LENGTH_SHORT).show();
 
         // Chama a tela Principal
         Intent intent = new Intent(this, PrincipalActivity.class);
         startActivity(intent);
-
-        // Fecha a DepositoActivity e retorna à MainActivity
+        finish();
 
     }
+
+
 }

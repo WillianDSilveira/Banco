@@ -13,8 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class SaqueActivity extends AppCompatActivity {
-    RepositorioBanco repositorioBanco = new RepositorioBanco(this);
-    Conta conta = repositorioBanco.getConta();
+    RepositorioBanco repositorioBanco;
+    Conta conta;
 
 
     @Override
@@ -23,9 +23,12 @@ public class SaqueActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_saque);
 
+
     }
 
     public void confirmarSaque(View view) {
+        repositorioBanco = new RepositorioBanco(this);
+        conta = repositorioBanco.getConta();
 
         EditText edtValorSaque = findViewById(R.id.edtValorSaque);
         String valorTexto = edtValorSaque.getText().toString();
@@ -52,13 +55,14 @@ public class SaqueActivity extends AppCompatActivity {
         // Atualiza o saldo diretamente na conta
         double novoSaldo = conta.saldo - valorSaque;
         repositorioBanco.atualizarSaldo(novoSaldo);
-        repositorioBanco.registrarTransacao("Saque", valorSaque, novoSaldo);
+        repositorioBanco.registrarTransacao("saque", valorSaque, novoSaldo);
 
-        Toast.makeText(this, "Depósito realizado com sucesso", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Saque realizado com sucesso", Toast.LENGTH_SHORT).show();
 
 
         // Chama a tela Principal
         Intent intent = new Intent(this, PrincipalActivity.class);
         startActivity(intent);
+        finish();
     }
 }

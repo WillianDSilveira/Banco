@@ -14,17 +14,10 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/txtNomeTitular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:text="Titular: "
-            android:textSize="18sp" />
-
-        <TextView
             android:id="@+id/txtNumeroConta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
             android:text="Conta: "
             android:textSize="18sp" />
 
@@ -48,6 +41,13 @@
             android:layout_height="wrap_content"
             android:onClick="sacar"
             android:text="Sacar" />
+
+        <Button
+            android:id="@+id/btnExtrato"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="extrato"
+            android:text="Extrato" />
 
     </LinearLayout>
 

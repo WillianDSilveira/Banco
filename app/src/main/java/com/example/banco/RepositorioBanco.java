@@ -13,18 +13,23 @@ import java.util.List;
 
 public class RepositorioBanco extends SQLiteOpenHelper {
 
-
     public RepositorioBanco(@Nullable Context context) {
-        super(context, "log", null, 1);
+        super(context, "BancoApp", null, 1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String sql = "CREATE TABLE CONTA(id INTEGER NOT NULL PRIMARY KEY, saldo REAL)";
-        sqLiteDatabase.execSQL(sql);
-        Log.i("LOG", "Criado com sucesso a tabela LOG");
+    public void onCreate(SQLiteDatabase db) {
+        String sqlConta = "CREATE TABLE CONTA (id INTEGER PRIMARY KEY, saldo REAL)";
+        String sqlTransacao = "CREATE TABLE TRANSACAO (id INTEGER PRIMARY KEY AUTOINCREMENT, tipo TEXT, valor REAL, saldoAtual REAL)";
+        String sqlPix = "CREATE TABLE PIX (id INTEGER PRIMARY KEY AUTOINCREMENT, tipo TEXT, chave TEXT)";
 
+        db.execSQL(sqlConta);
+        db.execSQL(sqlTransacao);
+        db.execSQL(sqlPix);
+
+        db.execSQL("INSERT INTO CONTA (id, saldo) VALUES (1, 0)");
     }
+
 
     public Conta getConta() {
         Cursor cursor = getReadableDatabase().rawQuery("SELECT * FROM CONTA WHERE id = 1", null);
@@ -37,64 +42,9 @@ public class RepositorioBanco extends SQLiteOpenHelper {
         return null;
     }
 
-    public void atualizarSaldo(double novoSaldo){
-        String sql = "UPDATE CONTA SET saldo = " + novoSaldo + " WHERE id = 1";
-        Log.i("log", "SQL insert log: "+ sql);
-        super.getWritableDatabase().execSQL(sql);
-        Log.i("LOG", "SALVO COM SUCESSO");
-    }
-
-
-    public List<Conta> listarExtrato(){
-        ArrayList<Conta> lista = new ArrayList<>();
-
-        String sql = "select * from CONTA";
-        Log.i("LOG", "SQL para listar extrato: " + sql);
-        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-        cursor.moveToFirst();
-
-
-        for(int i=0; i < cursor.getCount(); i++){
-            Conta conta = new Conta();
-            conta.id = cursor.getInt(0); // coluna 0
-            conta.saldo = cursor.getDouble(1); // coluna 2
-            lista.add(conta);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return lista;
-
-    }
-
-    public double obterSaldo() {
-        // Retorna o saldo atual da conta
-        String sql = "SELECT saldo FROM CONTA WHERE id = 1";
-        Log.i("LOG", "SQL para obter saldo: " + sql);
-        Cursor cursor = super.getReadableDatabase().rawQuery(sql, null);
-        double saldo = 0.0;
-
-        if (cursor.moveToFirst()) {
-            saldo = cursor.getDouble(0);
-        }
-        cursor.close();
-        Log.i("LOG", "Saldo obtido: " + saldo);
-        return saldo;
-    }
-
-    public Conta buscarConta() {
-        Conta conta = null;
-        String sql = "SELECT * FROM CONTA WHERE id = 1";
-        Log.i("LOG", "SQL para buscar conta: " + sql);
-        Cursor cursor = getReadableDatabase().rawQuery(sql, null);
-
-        if (cursor.moveToFirst()) {
-            // Se encontrar a conta, preenche a instância de Conta
-            conta = new Conta();
-            conta.id = cursor.getInt(0);   // coluna 0: ID
-            conta.saldo = cursor.getDouble(1); // coluna 1: Saldo
-        }
-        cursor.close();
-        return conta;
+    public void atualizarSaldo(double novoSaldo) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("UPDATE CONTA SET saldo = ? WHERE id = 1", new Object[]{novoSaldo});
     }
 
     public void registrarTransacao(String tipo, double valor, double saldoAtual) {
@@ -103,9 +53,23 @@ public class RepositorioBanco extends SQLiteOpenHelper {
                 new Object[]{tipo, valor, saldoAtual});
     }
 
-    public List<String> listarTransacoes() {
+    public List<String> listarTransacoes(String tipo) {
         List<String> transacoes = new ArrayList<>();
-        Cursor cursor = getReadableDatabase().rawQuery("SELECT tipo, valor, saldoAtual FROM TRANSACAO", null);
+
+        String query;
+        String[] args = null;
+
+        if (tipo == null || tipo.trim().isEmpty()) {
+
+            query = "SELECT tipo, valor, saldoAtual FROM TRANSACAO";
+        } else {
+
+            query = "SELECT tipo, valor, saldoAtual FROM TRANSACAO WHERE tipo = ?";
+            args = new String[]{tipo};
+        }
+
+        Cursor cursor = getReadableDatabase().rawQuery(query, args);
+
         while (cursor.moveToNext()) {
             String linha = "Tipo: " + cursor.getString(0) +
                     " | Valor: R$ " + cursor.getDouble(1) +
@@ -113,14 +77,33 @@ public class RepositorioBanco extends SQLiteOpenHelper {
             transacoes.add(linha);
         }
         cursor.close();
+
         return transacoes;
     }
 
-
-
+    public Conta getContaAtualizada() {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = null;
+        try {
+            cursor = db.rawQuery("SELECT id, saldo FROM CONTA WHERE id = 1", null);
+            if (cursor.moveToFirst()) {
+                int idConta = cursor.getInt(0);
+                double saldoAtual = cursor.getDouble(1);
+                return new Conta(idConta, saldoAtual);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return null;
+    }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS CONTA");
+        db.execSQL("DROP TABLE IF EXISTS TRANSACAO");
+        db.execSQL("DROP TABLE IF EXISTS PIX");
+        onCreate(db);
     }
 }

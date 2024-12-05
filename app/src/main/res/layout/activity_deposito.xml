@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="200dp"
-            android:hint="Digite o valor do depósito"
+            android:hint="Valor"
             android:inputType="numberDecimal" />
 
         <Button
@@ -29,10 +29,6 @@
             android:onClick="confirmarDeposito"
             android:text="Confirmar Depósito" />
 
-        <ListView
-            android:id="@+id/ListaExtrato"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
     </LinearLayout>
 

@@ -23,9 +23,9 @@
             android:textSize="20dp" />
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/editTextTipo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:ems="10"
             android:hint="Deposito"
             android:inputType="text" />
@@ -34,9 +34,11 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="buscar"
             android:text="Buscar" />
 
         <ListView
+            android:id="@+id/ListaExtrato"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
