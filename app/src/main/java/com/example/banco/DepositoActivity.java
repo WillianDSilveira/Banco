@@ -44,7 +44,7 @@ public class DepositoActivity extends AppCompatActivity {
 
         // Atualiza o saldo diretamente na conta
         double novoSaldo = conta.saldo + valorDeposito;
-        repositorioBanco.atualizarSaldo(valorDeposito);
+        repositorioBanco.atualizarSaldo(novoSaldo);
         repositorioBanco.registrarTransacao("deposito", valorDeposito, novoSaldo);
 
         Toast.makeText(this, "Depósito realizado com sucesso", Toast.LENGTH_SHORT).show();
