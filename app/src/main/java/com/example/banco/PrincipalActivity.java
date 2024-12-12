@@ -32,7 +32,6 @@ public class PrincipalActivity extends AppCompatActivity {
         int numeroConta = repositorioBanco.getContaAtualizada().id;
         double saldo = repositorioBanco.getContaAtualizada().saldo;
 
-
         txtNumeroConta.setText("Conta: " + numeroConta);
         txtSaldo.setText(String.format("Saldo: R$ %.2f", saldo));
     }
@@ -52,6 +51,12 @@ public class PrincipalActivity extends AppCompatActivity {
     // EXTRATO
     public void extrato(View view) {
         Intent intent = new Intent(this, ExtratoActivity.class);
+        startActivity(intent);
+    }
+
+    // PIX
+    public void Pix(View view) {
+        Intent intent = new Intent(this, PixActivity.class);
         startActivity(intent);
     }
 }

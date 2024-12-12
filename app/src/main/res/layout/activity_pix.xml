@@ -5,56 +5,51 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PrincipalActivity">
+    tools:context=".PixActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingTop="500px"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
 
-        <TextView
-            android:id="@+id/txtNumeroConta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="200dp"
-            android:text="Conta: "
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/txtSaldo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Saldo: R$ 0,00"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/btnDeposito"
+        <EditText
+            android:id="@+id/editTextCadastroPixCPF"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="depositar"
-            android:text="Depositar" />
+            android:ems="10"
+            android:hint="Digite o seu CPF"
+            android:inputType="text" />
 
-        <Button
-            android:id="@+id/btnSaque"
+        <EditText
+            android:id="@+id/editTextCadastroPixTelefone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="sacar"
-            android:text="Sacar" />
+            android:ems="10"
+            android:hint="Digita seu telefone"
+            android:inputType="text" />
 
         <Button
-            android:id="@+id/btnExtrato"
+            android:id="@+id/cadastroPix"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="extrato"
-            android:text="Extrato" />
+            android:onClick="CadastroPix"
+            android:text="Cadastrar chave PIX" />
 
         <Button
-            android:id="@+id/buttonPix"
+            android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="Pix"
-            android:text="PIX" />
+            android:onClick="listarChaves"
+            android:text="VER CHAVES" />
+        <Button
+            android:id="@+id/enviarPix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="enviarPix"
+            android:text="Enviar Pix" />
 
     </LinearLayout>
 
