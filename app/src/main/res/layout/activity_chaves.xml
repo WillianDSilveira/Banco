@@ -17,16 +17,16 @@
         <ListView
             android:id="@+id/editListChaves"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="500px" />
+            android:layout_height="532dp"
+            android:paddingTop="300px" />
 
         <EditText
             android:id="@+id/editTextRemover"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:ems="10"
             android:hint="Digite o ID"
-            android:inputType="text" />
+            android:inputType="number" />
 
         <Button
             android:id="@+id/button2"
